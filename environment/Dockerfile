@@ -30,8 +30,8 @@ RUN \
         wget --quiet http://hera.physchem.kth.se/~repo/bjodahimg/latest/pypi/$FNAME -O /tmp/$FNAME; \
     done && \
     for PYPKG in scipy future cython sympy pytest pytest-pep8 pytest-cov pytest-flakes sphinx periodictable pycompilation pycodeexport pelican coveralls numpydoc jupyter argh quantities ; do \
-        easy_install-2.7 --allow-hosts=None --find-links file:///tmp/ $PYPKG; \
-        easy_install-3.4 --allow-hosts=None --find-links file:///tmp/ $PYPKG; \
+        easy_install-2.7 --always-unzip --allow-hosts=None --find-links file:///tmp/ $PYPKG; \
+        easy_install-3.4 --always-unzip --allow-hosts=None --find-links file:///tmp/ $PYPKG; \
     done && \
     for FNAME in {boost-all_1.59.0-1_amd64.deb boost-all-dev_1.59.0-1_amd64.deb boost-build_1.59.0-1_amd64.deb libsundials-serial_2.6.2-1_amd64.deb }; do \
         FILE=$(mktemp); wget "http://hera.physchem.kth.se/~repo/bjodahimg/latest/dpkg/$FNAME" -qO $FILE && sudo dpkg -i $FILE; rm $FILE; \
@@ -41,3 +41,5 @@ RUN \
     mkdir -p /root/.config/matplotlib/ && \
     echo "backend: Agg" > /root/.config/matplotlib/matplotlibrc && \
     sed -i 's/TkAgg/Agg/g' /etc/matplotlibrc
+RUN \
+    easy_install /usr/local/lib/python2.7/dist-packages/pytest_pep8-1.0.6-py2.7.egg
