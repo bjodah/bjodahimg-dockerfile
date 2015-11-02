@@ -1,5 +1,5 @@
 # DO NOT EDIT, This Dockerfile is generated from ./tools/10_generate_Dockerfile.sh
-FROM bjodah/bjodahimgbase:latest
+FROM bjodah/bjodahimgbase:v1.0
 MAINTAINER Björn Dahlgren <bjodah@DELETEMEgmail.com>
 RUN \
     apt-get update && apt-get --quiet --assume-yes install     texlive-bibtex-extra \ 
@@ -9,7 +9,6 @@ RUN \
     libfreetype6-dev libpng12-dev \
     libgmp-dev libmpfr-dev \
     libopenmpi-dev \
-    libgsl0-dev \
     libatlas-base-dev \
     python-pip python3-pip \
     python-numpy python3-numpy \
@@ -33,7 +32,7 @@ RUN \
         easy_install-2.7 --always-unzip --allow-hosts=None --find-links file:///tmp/ $PYPKG; \
         easy_install-3.4 --always-unzip --allow-hosts=None --find-links file:///tmp/ $PYPKG; \
     done && \
-    for FNAME in {boost-all_1.59.0-1_amd64.deb boost-all-dev_1.59.0-1_amd64.deb boost-build_1.59.0-1_amd64.deb libsundials-serial_2.6.2-1_amd64.deb }; do \
+    for FNAME in {boost-all_1.59.0-1_amd64.deb boost-all-dev_1.59.0-1_amd64.deb boost-build_1.59.0-1_amd64.deb libgsl2_2.0-1_amd64.deb libsundials-serial_2.6.2-1_amd64.deb }; do \
         FILE=$(mktemp); wget "http://hera.physchem.kth.se/~repo/bjodahimg/latest/dpkg/$FNAME" -qO $FILE && sudo dpkg -i $FILE; rm $FILE; \
     done && \
     apt-get clean && \
