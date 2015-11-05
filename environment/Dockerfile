@@ -41,4 +41,8 @@ RUN \
     echo "backend: Agg" > /root/.config/matplotlib/matplotlibrc && \
     sed -i 's/TkAgg/Agg/g' /etc/matplotlibrc
 RUN \
-    easy_install /usr/local/lib/python2.7/dist-packages/pytest_pep8-1.0.6-py2.7.egg
+    #apt-get update && apt-get --quiet --assume-yes install libzmq3-dev && \
+    #apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
+    easy_install-2.7 /usr/local/lib/python2.7/dist-packages/*-py2.7.egg && \
+    easy_install-3.4 /usr/local/lib/python3.4/dist-packages/*-py3.4.egg
